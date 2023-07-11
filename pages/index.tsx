@@ -19,7 +19,7 @@ export default function Home() {
   return (
     <div className={"styles.container"} >
       <Head>
-        <title>kkk</title>
+        <title>Giooooo</title>
 
       </Head>
 

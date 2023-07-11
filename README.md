@@ -1,3 +1,31 @@
+Memorandum
+Steps to create this project
+Code:
+npx create-next-app getting-started --example with-typescript
+npm install -D tailwindcss postcss autoprefixer
+npx tailwindcss init -p
+
+inside tailwind.config.js file
+content: [
+    './pages/**/*.{js,ts,jsx,tsx}',
+    './components/**/*.{js,ts,jsx,tsx}',
+  ],
+
+  create folder styles and file globals.css
+  edit globals.css
+
+  create file _app.tsx
+
+  edit index.tsx
+
+  install Chakra
+  yarn add @chakra-ui/react @emotion/react @emotion/styled framer-motion
+
+  edit _app.tsx & index.tsx
+
+  npm run dev
+
+
 # TypeScript Next.js example
 
 This is a really simple project that shows the usage of Next.js with TypeScript.

@@ -1,3 +1,4 @@
+Maew (Mæw)
 Memorandum
 Steps to create this project
 Code:
@@ -24,6 +25,8 @@ content: [
   edit _app.tsx & index.tsx
 
   npm run dev
+
+  Create component modal
 
 
 # TypeScript Next.js example

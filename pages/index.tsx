@@ -13,19 +13,31 @@
 // export default IndexPage
 
 import Head from "next/head";
-import { Heading,} from "@chakra-ui/react"
+import { Heading, } from "@chakra-ui/react"
+import Modal from "../components/Modal";
+
+
+function testFun(){
+  return(
+    <>
+      <h1>Sono Test</h1>
+    </>
+  )
+}
 
 export default function Home() {
   return (
     <div className={"styles.container"} >
       <Head>
-        <title>Giooooo</title>
-
+        <title>Modal</title>
+        <meta name="description" content="Generate by create next app" />
+        <link rel="icon" href="/favicon.icon" />
       </Head>
 
       <main>
         <h1 className="text-7xl font-bold underline">GIOOOOOOOOOOO</h1>
         <Heading className="font-bold underline" >Ciaooooooooo</Heading>
+        <Modal/>
       </main>
     </div>
   )

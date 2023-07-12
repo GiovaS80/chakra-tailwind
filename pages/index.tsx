@@ -14,8 +14,7 @@
 
 import Head from "next/head";
 import { Heading, } from "@chakra-ui/react"
-import Modal from "../components/Modal";
-
+import ModalComponent from "../components/ModalComponent";
 
 function testFun(){
   return(
@@ -35,9 +34,10 @@ export default function Home() {
       </Head>
 
       <main>
-        <h1 className="text-7xl font-bold underline">GIOOOOOOOOOOO</h1>
-        <Heading className="font-bold underline" >Ciaooooooooo</Heading>
-        <Modal/>
+        <Heading className="text-center font-bold underline m-8" >Welcome</Heading>
+        <h1 className="text-center text-2xl font-bold underline m-8">Modal Test</h1>
+
+        <ModalComponent/>
       </main>
     </div>
   )

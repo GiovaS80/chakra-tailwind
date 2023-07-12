@@ -3,6 +3,7 @@ import React from "react"
 import { FC, useState } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownLeftAndUpRightToCenter, faEnvelope, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
+import FormComponent from "./FormComponent"
 
 const ModalComponent: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
@@ -48,7 +49,7 @@ const ModalComponent: FC = () => {
                     {/* <ModalCloseButton /> */}
                     <ModalBody>
                         <p> {size} </p>
-                        <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Alias quo hic dolores impedit ipsa recusandae, ratione dolorem facere excepturi veniam officia, odit animi omnis accusantium aspernatur necessitatibus. Ad, doloremque vitae?</p>
+                        <FormComponent />
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={onClose}>Close</Button>

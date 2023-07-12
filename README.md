@@ -35,6 +35,7 @@ content: [
 
   yarn add @fortawesome/react-fontawesome@latest
 
+  yarn add react-router-dom
 
 
 

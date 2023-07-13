@@ -18,7 +18,7 @@ const ModalComponent: FC = () => {
     const resize = () => {
         setZoomIn(!zoomIn)
         if (zoomIn) setSize('sm');
-        else setSize('lg');
+        else setSize('xl');
 
     }
 

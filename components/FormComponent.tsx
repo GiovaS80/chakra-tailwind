@@ -24,7 +24,8 @@ const FormComponent: FC = () => {
         <li key={ind}>{file.name}</li>
     )
 
-    const sicboc = (e) => {
+
+    const onSubmit = (e) => {
         e.preventDefault();
         console.log(e);
     }
@@ -40,15 +41,13 @@ const FormComponent: FC = () => {
         setFiles(e.dataTransfer.files);
     }
 
-    const clickTest = (e) => {
-        e.preventDefault();
-        console.log("you click me " + e);
-    }
-
     return (
         <>
+
+
+
             <Box>
-                <form method="post" onSubmit={sicboc}>
+                <form method="post" onSubmit={onSubmit}>
                     <FormControl>
                         <FormLabel>Attachments <span>Optional</span> </FormLabel>
                         <Box className="container h-40 border-2 border-orange-900">

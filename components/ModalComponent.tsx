@@ -5,10 +5,24 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownLeftAndUpRightToCenter, faEnvelope, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
 import FormComponent from "./FormComponent"
 
+export const TestForm = () => {
+    console.log("comunico");
+
+}
+
 const ModalComponent: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [size, setSize] = React.useState('md')
     const [zoomIn, setZoomIn] = React.useState(false)
+
+
+    
+
+    const updateName = (data: any): void => {
+        
+        console.log(data);
+        
+    }
 
     const handleSizeClick = (newSize) => {
         setSize(newSize)
@@ -21,6 +35,13 @@ const ModalComponent: FC = () => {
         else setSize('xl');
 
     }
+
+    const pippoModalTest = (dati) => {
+        console.log('sono test');
+        console.log(dati);
+        TestForm()
+    }
+
 
     return (
         <>
@@ -49,7 +70,13 @@ const ModalComponent: FC = () => {
                     {/* <ModalCloseButton /> */}
                     <ModalBody>
                         <p> {size} </p>
-                        <FormComponent />
+
+                        <FormComponent
+                            
+                            updateName={updateName}
+                            onClose={onClose}
+                        />
+
                     </ModalBody>
                     <ModalFooter>
                         <Button onClick={onClose}>Close</Button>
@@ -65,3 +92,6 @@ const ModalComponent: FC = () => {
 
 
 export default ModalComponent
+
+function pippoTest() {
+}

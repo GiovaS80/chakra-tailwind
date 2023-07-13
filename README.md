@@ -38,6 +38,7 @@ content: [
   yarn add react-router-dom
   installation NOT required for this project
 
+  yarn add react-hook-form
 
 
 # TypeScript Next.js example

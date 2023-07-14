@@ -1,8 +1,7 @@
-import { Box, Button, FormControl, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
 import React, { useEffect, useRef, useState } from "react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
-import ModalComponent, { TestForm } from "./ModalComponent";
 
 // export const createAction = async ({ request }) => {
 //     const data = await request.formData()
@@ -13,17 +12,26 @@ import ModalComponent, { TestForm } from "./ModalComponent";
 
 // }
 
-interface IfirstChildProps {
-    updateName: ( data:any) => void,
+interface ModelComponentProps {
+    updateData: (data: any) => void,
     onClose: () => void
 }
 
-const FormComponent: FC<IfirstChildProps> = ({ updateName, onClose }) => {
+const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
     const [files, setFiles] = React.useState(null)
+    const [enableDataSending, setEnableDataSending] = React.useState(false)
+    const [requestType, setRequestType] = React.useState("")
+    const [subject, setSubject] = React.useState("")
+    const [textArea, setTextArea] = React.useState("")
+
     const inputRef = useRef(null)
 
     const dataForm = {
-        data: {},
+        data: {
+            requestType: '',
+            subject: '',
+            textArea: ''
+        },
         file: []
     }
 
@@ -35,15 +43,7 @@ const FormComponent: FC<IfirstChildProps> = ({ updateName, onClose }) => {
     const listFiles = arrayFiles.map((file, ind) =>
         <li key={ind}>{file.name}</li>
     )
-    const { register, handleSubmit } = useForm();
-
-    const cancelForm = () => {
-        console.log('sono cancel');
-        TestForm()
-        console.log(ModalComponent);
-        console.log(TestForm);
-
-    }
+    // const { register, handleSubmit } = useForm();
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -52,45 +52,99 @@ const FormComponent: FC<IfirstChildProps> = ({ updateName, onClose }) => {
 
     const handleDrop = (e) => {
         e.preventDefault();
-        console.log(e.dataTransfer.files);
+        // console.log(e.dataTransfer.files);
         setFiles(e.dataTransfer.files);
     }
 
+    const onSubmit = (e) => {
+        e.preventDefault();
+        console.log('*********=====CIAO DA SUBMIT=========*******');
+        if (enableDataSending) {
+            dataForm.data.requestType = requestType
+            dataForm.data.subject = subject
+            dataForm.data.textArea = textArea
+            console.log("ti faccio passare");
+            dataForm.file = arrayFiles
+            // updateData(dataForm)
+            // onClose()
+        }
+        else console.log("ti blocco");
 
-    const onSubmit = (data: unknown) => {
-        console.log(data);
-        dataForm.data = data
-        dataForm.file = arrayFiles
-        console.log(dataForm);
-        updateName(dataForm)
-        onClose()
     }
 
-    // const onSubmit = (e) => {
-    //     e.preventDefault();
-    //     console.log(e);
-    // }
-    const [firstChildName, setFirstChildName] = useState<string>('')
+    const handleInputChange = (e, from) => {
+        switch (from) {
+            case "requestType":
+                setRequestType(e.target.value)
+                break
+            case "subject":
+                setSubject(e.target.value)
+                break
+            case "textArea":
+                setTextArea(e.target.value)
+                break
+        }
 
-    
+        if (
+            requestType !== "" &&
+            subject.trim() !== "" &&
+            textArea.trim() !== ""
+        ) setEnableDataSending(true)
+        else setEnableDataSending(false)
+    }
 
 
     return (
         <>
-
-            <Box>
-                <h1> {firstChildName} </h1>
-                <button onClick={() => updateName(dataForm)}>first child</button>
-            </Box>
-
-
             <Box>
                 <form
                     method="post"
-                    onSubmit={handleSubmit(onSubmit)}
-                // onSubmit={onSubmit}
+                    onSubmit={e => onSubmit(e)}
                 >
-                    <FormControl>
+
+                    <FormControl
+                        isRequired
+                        className="mt-4"
+                    >
+                        <FormLabel>Request type</FormLabel>
+                        <Select
+                            placeholder='Select request type'
+                            name="requestType"
+                            onChange={e => handleInputChange(e, "requestType")}
+                        >
+                            <option value='Pippo'>Pippo</option>
+                            <option value='Paperino'>Paperino</option>
+                            <option value='Pluto'>Pluto</option>
+                        </Select>
+                    </FormControl>
+
+                    <FormControl
+                        isRequired
+                        className="mt-4"
+                    >
+                        <FormLabel>Subject</FormLabel>
+                        <Input
+                            type="text"
+                            name="subject"
+                            variant='filled'
+                            onChange={e => handleInputChange(e, "subject")}
+                        />
+                    </FormControl>
+
+                    <FormControl
+                        isRequired
+                        className="mt-4"
+                    >
+                        <FormLabel>How can we help?</FormLabel>
+                        <Textarea
+                            name="textArea"
+                            resize={"none"}
+                            variant='filled'
+                            onChange={e => handleInputChange(e, "textArea")}
+                        />
+                    </FormControl>
+
+                    <FormControl className="mt-4">
                         <FormLabel>Attachments <span>Optional</span> </FormLabel>
                         <Box className="container h-40 border-2 border-orange-900">
                             {files && (
@@ -108,7 +162,6 @@ const FormComponent: FC<IfirstChildProps> = ({ updateName, onClose }) => {
                                     className="text-center h-full border-2 border-orange-900"
                                     onDragOver={handleDragOver}
                                     onDrop={handleDrop}
-                                    // onClick={clickTest}
                                     onClick={() => inputRef.current.click()}
                                 >
                                     <h1>Add up</h1>
@@ -119,54 +172,24 @@ const FormComponent: FC<IfirstChildProps> = ({ updateName, onClose }) => {
                                         hidden
                                         ref={inputRef}
                                     />
-                                    <button onClick={() => inputRef.current.click()}>Select Files</button>
                                 </Box>
                             )}
                             {/* end if files empty */}
                         </Box>
                     </FormControl>
 
-                    <FormControl>
-                        <FormLabel>Request type</FormLabel>
-                        <Select
-                            placeholder='Select request type'
-                            name="requestType"
-                            {...register('requestType')}
-                        >
-                            <option value='Pippo'>Pippo</option>
-                            <option value='Paperino'>Paperino</option>
-                            <option value='Pluto'>Pluto</option>
-                        </Select>
-                    </FormControl>
-
-                    <FormControl>
-                        <FormLabel>Subject</FormLabel>
-                        <Input
-                            type="text"
-                            name="subject"
-                            {...register('subject')}
-                        />
-                    </FormControl>
-
-                    <FormControl>
-                        <FormLabel>How can we help?</FormLabel>
-                        <Textarea
-                            name="textArea"
-                            {...register('textArea')}
-                        />
-                    </FormControl>
-
-                    {/* <FormControl>
-                        <FormLabel>Attachments <span>Optional</span> </FormLabel>
-                        <Input type="file" multiple={true} name="attachments" />
-                        <Box>
-                            <p>Drag and drop your file here or</p>
-                            <button className="upload-button">Upload a file</button>
-                        </Box>
-                    </FormControl> */}
-
-                    <Button m={3} type="submit">Submit</Button>
-                    <Button m={3} type="button" onClick={onClose} >cancel</Button>
+                    <Box className="text-right mt-4">
+                        <Button
+                            m={3}
+                            type="button"
+                            onClick={onClose}
+                        >Cancel</Button>
+                        <Button
+                            colorScheme='purple'
+                            isDisabled={!enableDataSending}
+                            m={3} type="submit"
+                        >Send</Button>
+                    </Box>
                 </form>
             </Box>
         </>

@@ -36,9 +36,11 @@ content: [
   yarn add @fortawesome/react-fontawesome@latest
 
   yarn add react-router-dom
-  installation NOT required for this project
+  installation NOT required for this project due to method change
 
   yarn add react-hook-form
+  installation NOT required for this project due to data validation method change
+
 
 
 # TypeScript Next.js example

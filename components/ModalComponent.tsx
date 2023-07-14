@@ -5,23 +5,14 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownLeftAndUpRightToCenter, faEnvelope, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
 import FormComponent from "./FormComponent"
 
-export const TestForm = () => {
-    console.log("comunico");
-
-}
-
 const ModalComponent: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
     const [size, setSize] = React.useState('md')
     const [zoomIn, setZoomIn] = React.useState(false)
 
 
-    
-
-    const updateName = (data: any): void => {
-        
+    const updateData = (data: any): void => {
         console.log(data);
-        
     }
 
     const handleSizeClick = (newSize) => {
@@ -31,23 +22,16 @@ const ModalComponent: FC = () => {
 
     const resize = () => {
         setZoomIn(!zoomIn)
-        if (zoomIn) setSize('sm');
-        else setSize('xl');
+        if (zoomIn) setSize('3xl');
+        else setSize('6xl');
 
     }
-
-    const pippoModalTest = (dati) => {
-        console.log('sono test');
-        console.log(dati);
-        TestForm()
-    }
-
 
     return (
         <>
             <Box textAlign={'center'}>
                 <Button
-                    onClick={() => handleSizeClick('sm')}
+                    onClick={() => handleSizeClick('3xl')}
                     m={4}
                 >{`Open Modal`}</Button>
             </Box>
@@ -72,15 +56,14 @@ const ModalComponent: FC = () => {
                         <p> {size} </p>
 
                         <FormComponent
-                            
-                            updateName={updateName}
+                            updateData={updateData}
                             onClose={onClose}
                         />
 
                     </ModalBody>
-                    <ModalFooter>
+                    {/* <ModalFooter>
                         <Button onClick={onClose}>Close</Button>
-                    </ModalFooter>
+                    </ModalFooter> */}
                 </ModalContent>
             </Modal>
         </>
@@ -89,9 +72,4 @@ const ModalComponent: FC = () => {
 }
 //end Model
 
-
-
 export default ModalComponent
-
-function pippoTest() {
-}

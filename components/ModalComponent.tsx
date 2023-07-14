@@ -10,10 +10,7 @@ const ModalComponent: FC = () => {
     const [size, setSize] = React.useState('md')
     const [zoomIn, setZoomIn] = React.useState(false)
 
-
-    const updateData = (data: any): void => {
-        console.log(data);
-    }
+    const updateData = (data: any): void => console.log(data);
 
     const handleSizeClick = (newSize) => {
         setSize(newSize)
@@ -24,7 +21,6 @@ const ModalComponent: FC = () => {
         setZoomIn(!zoomIn)
         if (zoomIn) setSize('3xl');
         else setSize('6xl');
-
     }
 
     return (
@@ -48,12 +44,13 @@ const ModalComponent: FC = () => {
                         </Box>
                         <Spacer />
                         <Box p='2.5' >
-                            <FontAwesomeIcon icon={zoomIn ? faDownLeftAndUpRightToCenter : faUpRightAndDownLeftFromCenter} onClick={() => resize()} />
+                            <FontAwesomeIcon
+                                icon={zoomIn ? faDownLeftAndUpRightToCenter : faUpRightAndDownLeftFromCenter}
+                                onClick={() => resize()}
+                            />
                         </Box>
                     </Flex>
-                    {/* <ModalCloseButton /> */}
                     <ModalBody>
-                        <p> {size} </p>
 
                         <FormComponent
                             updateData={updateData}
@@ -61,15 +58,11 @@ const ModalComponent: FC = () => {
                         />
 
                     </ModalBody>
-                    {/* <ModalFooter>
-                        <Button onClick={onClose}>Close</Button>
-                    </ModalFooter> */}
                 </ModalContent>
             </Modal>
         </>
     )
-    // return <h1>Sono Model aggiornato</h1>
-}
-//end Model
+    // return 
+}//end ModelComponent
 
 export default ModalComponent

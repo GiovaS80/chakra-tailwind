@@ -1,18 +1,8 @@
 import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useEffect, useRef, useState } from "react";
+import React, { useRef } from "react";
 import { FC } from "react";
-import { useForm } from "react-hook-form";
-
-// export const createAction = async ({ request }) => {
-//     const data = await request.formData()
-//     const task = {
-//         subject: data.get('subject')
-//     }
-//     console.log(task);
-
-// }
 
 interface ModelComponentProps {
     updateData: (data: any) => void,
@@ -40,8 +30,8 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
     var arrayFiles = []
     if (files != null) {
         const regex = /(.png|.jpg|.jpeg|.gif|.tiff)/;
-        Object.values(files).map((e:any) => {
-            if(regex.test(e.name) && arrayFiles.length < 4) arrayFiles.push(e)
+        Object.values(files).map((e: any) => {
+            if (regex.test(e.name) && arrayFiles.length < 4) arrayFiles.push(e)
         })
     }
     const listFiles = arrayFiles.map((file, ind) =>
@@ -55,7 +45,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
 
     const handleDrop = (e) => {
         e.preventDefault();
-        setFiles(e.dataTransfer.files);        
+        setFiles(e.dataTransfer.files);
     }
 
     const onSubmit = (e) => {
@@ -164,10 +154,8 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                                     onDrop={handleDrop}
                                     onClick={() => inputRef.current.click()}
                                 >
-                                    {/* <Box className=""> */}
-                                        <FontAwesomeIcon icon={faImage} />
-                                        <h1 className="m-3">Add up to 4 screenshot</h1>
-                                    {/* </Box> */}
+                                    <FontAwesomeIcon icon={faImage} />
+                                    <h1 className="m-3">Add up to 4 screenshot</h1>
                                     <input
                                         type="file"
                                         multiple

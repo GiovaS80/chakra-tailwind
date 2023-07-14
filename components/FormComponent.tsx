@@ -1,4 +1,6 @@
 import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useEffect, useRef, useState } from "react";
 import { FC } from "react";
 import { useForm } from "react-hook-form";
@@ -37,13 +39,14 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
 
     var arrayFiles = []
     if (files != null) {
-        arrayFiles = (Object.values(files))
-        console.log(arrayFiles);
+        const regex = /(.png|.jpg|.jpeg|.gif|.tiff)/;
+        Object.values(files).map((e:any) => {
+            if(regex.test(e.name) && arrayFiles.length < 4) arrayFiles.push(e)
+        })
     }
     const listFiles = arrayFiles.map((file, ind) =>
         <li key={ind}>{file.name}</li>
     )
-    // const { register, handleSubmit } = useForm();
 
     const handleDragOver = (e) => {
         e.preventDefault();
@@ -52,23 +55,20 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
 
     const handleDrop = (e) => {
         e.preventDefault();
-        // console.log(e.dataTransfer.files);
-        setFiles(e.dataTransfer.files);
+        setFiles(e.dataTransfer.files);        
     }
 
     const onSubmit = (e) => {
         e.preventDefault();
-        console.log('*********=====CIAO DA SUBMIT=========*******');
         if (enableDataSending) {
             dataForm.data.requestType = requestType
             dataForm.data.subject = subject
             dataForm.data.textArea = textArea
-            console.log("ti faccio passare");
             dataForm.file = arrayFiles
-            // updateData(dataForm)
-            // onClose()
+            updateData(dataForm)
+            onClose()
         }
-        else console.log("ti blocco");
+        else alert("A problem occurred in the FORM")
 
     }
 
@@ -146,7 +146,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
 
                     <FormControl className="mt-4">
                         <FormLabel>Attachments <span>Optional</span> </FormLabel>
-                        <Box className="container h-40 border-2 border-orange-900">
+                        <Box className="container h-48 border-2 border-orange-900">
                             {files && (
                                 <Box>
                                     <Box className="text-center m-3">
@@ -159,12 +159,15 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                             )}
                             {!files && (
                                 <Box
-                                    className="text-center h-full border-2 border-orange-900"
+                                    className="flex justify-center items-center h-full border-2 border-orange-900"
                                     onDragOver={handleDragOver}
                                     onDrop={handleDrop}
                                     onClick={() => inputRef.current.click()}
                                 >
-                                    <h1>Add up</h1>
+                                    {/* <Box className=""> */}
+                                        <FontAwesomeIcon icon={faImage} />
+                                        <h1 className="m-3">Add up to 4 screenshot</h1>
+                                    {/* </Box> */}
                                     <input
                                         type="file"
                                         multiple

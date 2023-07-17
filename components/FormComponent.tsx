@@ -1,4 +1,4 @@
-import { Box, Button, FormControl, FormErrorMessage, FormHelperText, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
+import { Box, Button, FormControl, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
@@ -38,17 +38,17 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
         <li key={ind}>{file.name}</li>
     )
 
-    const handleDragOver = (e) => {
+    const handleDragOver = (e: { preventDefault: () => void; }) => {
         e.preventDefault();
         // console.log(e);
     }
 
-    const handleDrop = (e) => {
+    const handleDrop = (e: { preventDefault: () => void; dataTransfer: { files: any; }; }) => {
         e.preventDefault();
         setFiles(e.dataTransfer.files);
     }
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (enableDataSending) {
             dataForm.data.requestType = requestType
@@ -62,7 +62,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
 
     }
 
-    const handleInputChange = (e, from) => {
+    const handleInputChange = (e: any, from: string) => {
         switch (from) {
             case "requestType":
                 setRequestType(e.target.value)
@@ -96,7 +96,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                         isRequired
                         className="mt-4"
                     >
-                        <FormLabel>Request type</FormLabel>
+                        <FormLabel htmlFor="field-:r2:">Request type</FormLabel>
                         <Select
                             placeholder='Select request type'
                             name="requestType"
@@ -112,7 +112,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                         isRequired
                         className="mt-4"
                     >
-                        <FormLabel>Subject</FormLabel>
+                        <FormLabel htmlFor="field-:r3:">Subject</FormLabel>
                         <Input
                             type="text"
                             name="subject"
@@ -125,7 +125,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                         isRequired
                         className="mt-4"
                     >
-                        <FormLabel>How can we help?</FormLabel>
+                        <FormLabel htmlFor="field-:r4:">How can we help?</FormLabel>
                         <Textarea
                             name="textArea"
                             resize={"none"}
@@ -135,7 +135,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                     </FormControl>
 
                     <FormControl className="mt-4">
-                        <FormLabel>Attachments <span>Optional</span> </FormLabel>
+                        <FormLabel htmlFor="field-:r5:">Attachments <span>Optional</span> </FormLabel>
                         <Box className="container h-48 border-2 border-orange-900">
                             {files && (
                                 <Box>
@@ -149,7 +149,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                             )}
                             {!files && (
                                 <Box
-                                    className="flex justify-center items-center h-full border-2 border-orange-900"
+                                    className="flex justify-center items-center h-full "
                                     onDragOver={handleDragOver}
                                     onDrop={handleDrop}
                                     onClick={() => inputRef.current.click()}

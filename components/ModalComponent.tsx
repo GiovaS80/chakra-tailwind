@@ -1,18 +1,18 @@
-import { Modal, Button, ModalBody, ModalCloseButton, ModalContent, ModalFooter, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Spacer } from "@chakra-ui/react"
+import { Modal, Button, ModalBody, ModalContent, ModalHeader, ModalOverlay, useDisclosure, Flex, Box, Spacer } from "@chakra-ui/react"
 import React from "react"
-import { FC, useState } from "react"
+import { FC } from "react"
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faDownLeftAndUpRightToCenter, faEnvelope, faUpRightAndDownLeftFromCenter } from '@fortawesome/free-solid-svg-icons'
 import FormComponent from "./FormComponent"
 
 const ModalComponent: FC = () => {
     const { isOpen, onOpen, onClose } = useDisclosure()
-    const [size, setSize] = React.useState('md')
+    const [size, setSize] = React.useState('3xl')
     const [zoomIn, setZoomIn] = React.useState(false)
 
     const updateData = (data: any): void => console.log(data);
 
-    const handleSizeClick = (newSize) => {
+    const handleSizeClick = (newSize: string) => {
         setSize(newSize)
         onOpen()
     }
@@ -61,8 +61,7 @@ const ModalComponent: FC = () => {
                 </ModalContent>
             </Modal>
         </>
-    )
-    // return 
+    )//end return 
 }//end ModelComponent
 
 export default ModalComponent

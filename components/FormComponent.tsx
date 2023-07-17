@@ -1,9 +1,7 @@
 import { Box, Button, FormControl, FormLabel, Input, Select, Textarea } from "@chakra-ui/react";
-import { faImage } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React, { useRef } from "react";
 import { FC } from "react";
 import DragAndDropComponent from "./DragAndDropComponent"
+import React from "react";
 
 interface ModelComponentProps {
     updateData: (data: any) => void,
@@ -14,12 +12,9 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
     const [requestType, setRequestType] = React.useState("")
     const [subject, setSubject] = React.useState("")
     const [textArea, setTextArea] = React.useState("")
-    const [files, setFiles] = React.useState(null)
     const [enableDataSending, setEnableDataSending] = React.useState(false)
 
     const updateFile = (dataFile: any): void => dataForm.file=dataFile;
-
-    const inputRef = useRef(null)
 
     const dataForm = {
         data: {
@@ -30,39 +25,16 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
         file: []
     }
 
-    var arrayFiles = []
-    if (files != null) {
-        const regex = /(.png|.jpg|.jpeg|.gif|.tiff)/;
-        Object.values(files).map((e: any) => {
-            if (regex.test(e.name) && arrayFiles.length < 4) arrayFiles.push(e)
-        })
-    }
-    const listFiles = arrayFiles.map((file, ind) =>
-        <li key={ind}>{file.name}</li>
-    )
-
-    const handleDragOver = (e: { preventDefault: () => void; }) => {
-        e.preventDefault();
-        // console.log(e);
-    }
-
-    const handleDrop = (e: { preventDefault: () => void; dataTransfer: { files: any; }; }) => {
-        e.preventDefault();
-        setFiles(e.dataTransfer.files);
-    }
-
     const onSubmit = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (enableDataSending) {
             dataForm.data.requestType = requestType
             dataForm.data.subject = subject
             dataForm.data.textArea = textArea
-            // dataForm.file = arrayFiles
             updateData(dataForm)
             onClose()
         }
         else alert("A problem occurred in the FORM")
-
     }
 
     const handleInputChange = (e: any, from: string) => {

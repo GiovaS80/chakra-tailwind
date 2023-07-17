@@ -3,6 +3,7 @@ import { faImage } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React, { useRef } from "react";
 import { FC } from "react";
+import DragAndDropComponent from "./DragAndDropComponent"
 
 interface ModelComponentProps {
     updateData: (data: any) => void,
@@ -15,6 +16,8 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
     const [textArea, setTextArea] = React.useState("")
     const [files, setFiles] = React.useState(null)
     const [enableDataSending, setEnableDataSending] = React.useState(false)
+
+    const updateFile = (dataFile: any): void => dataForm.file=dataFile;
 
     const inputRef = useRef(null)
 
@@ -54,7 +57,7 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
             dataForm.data.requestType = requestType
             dataForm.data.subject = subject
             dataForm.data.textArea = textArea
-            dataForm.file = arrayFiles
+            // dataForm.file = arrayFiles
             updateData(dataForm)
             onClose()
         }
@@ -91,6 +94,10 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                     method="post"
                     onSubmit={e => onSubmit(e)}
                 >
+
+                    <DragAndDropComponent 
+                    updateFile={updateFile}
+                    />
 
                     <FormControl
                         isRequired

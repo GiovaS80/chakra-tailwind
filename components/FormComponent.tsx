@@ -10,11 +10,11 @@ interface ModelComponentProps {
 }
 
 const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
-    const [files, setFiles] = React.useState(null)
-    const [enableDataSending, setEnableDataSending] = React.useState(false)
     const [requestType, setRequestType] = React.useState("")
     const [subject, setSubject] = React.useState("")
     const [textArea, setTextArea] = React.useState("")
+    const [files, setFiles] = React.useState(null)
+    const [enableDataSending, setEnableDataSending] = React.useState(false)
 
     const inputRef = useRef(null)
 

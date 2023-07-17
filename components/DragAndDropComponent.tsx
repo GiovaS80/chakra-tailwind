@@ -37,8 +37,8 @@ const DragAndDropComponent: FC<FormComponentProps> = ({updateFile}) => {
     return (
         <>
         <FormControl className="mt-4">
-                        <FormLabel htmlFor="field-:r5:">Attachments 2<span className="text-gray-600 text-sm" >Optional</span> </FormLabel>
-                        <Box className="container h-48 border-2 border-orange-900">
+                        <FormLabel htmlFor="field-:r5:">Attachments <span className="text-gray-600 text-sm" >Optional</span> </FormLabel>
+                        <Box className="container h-48 border-dashed border">
                             {filesAtt && (
                                 <Box>
                                     <Box className="text-center m-3">

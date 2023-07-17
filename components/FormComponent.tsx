@@ -95,10 +95,6 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                     onSubmit={e => onSubmit(e)}
                 >
 
-                    <DragAndDropComponent 
-                    updateFile={updateFile}
-                    />
-
                     <FormControl
                         isRequired
                         className="mt-4"
@@ -141,40 +137,9 @@ const FormComponent: FC<ModelComponentProps> = ({ updateData, onClose }) => {
                         />
                     </FormControl>
 
-                    <FormControl className="mt-4">
-                        <FormLabel htmlFor="field-:r5:">Attachments <span>Optional</span> </FormLabel>
-                        <Box className="container h-48 border-2 border-orange-900">
-                            {files && (
-                                <Box>
-                                    <Box className="text-center m-3">
-                                        <ul> {listFiles} </ul>
-                                    </Box>
-                                    <Box className="text-center m-3">
-                                        <Button onClick={() => setFiles(null)} >Cancel</Button>
-                                    </Box>
-                                </Box>
-                            )}
-                            {!files && (
-                                <Box
-                                    className="flex justify-center items-center h-full "
-                                    onDragOver={handleDragOver}
-                                    onDrop={handleDrop}
-                                    onClick={() => inputRef.current.click()}
-                                >
-                                    <FontAwesomeIcon icon={faImage} />
-                                    <h1 className="m-3">Add up to 4 screenshot</h1>
-                                    <input
-                                        type="file"
-                                        multiple
-                                        onChange={(e) => setFiles(e.target.files)}
-                                        hidden
-                                        ref={inputRef}
-                                    />
-                                </Box>
-                            )}
-                            {/* end if files empty */}
-                        </Box>
-                    </FormControl>
+                    <DragAndDropComponent 
+                    updateFile={updateFile}
+                    />
 
                     <Box className="text-right mt-4">
                         <Button
